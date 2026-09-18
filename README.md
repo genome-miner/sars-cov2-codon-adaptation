@@ -13,7 +13,7 @@
 
 <br>
 
-*An in silico research project applying computational sequence analysis, exploratory statistics, and supervised machine learning to characterize how well SARS-CoV-2 variant coding sequences are adapted to human codon usage, and to test whether this adaptation can be predicted from simpler sequence composition features, motivated by the role of codon adaptation in mRNA vaccine antigen design.*
+*An in silico computational project applying sequence analysis, exploratory statistics, and supervised machine learning to characterize how SARS-CoV-2 variant coding sequences are adapted to human codon usage and to test whether this adaptation can be predicted from simpler sequence-composition features, motivated by the relevance of codon adaptation to mRNA vaccine antigen design.*
 
 ---
 
@@ -41,13 +41,13 @@
 
 ## <a id="research-question"></a>❓ Research Question
 
-> Can codon usage bias and adaptation of SARS-CoV-2 variant coding sequences to the human host be quantitatively characterized using compositional and codon-level features, and can these features predict the Codon Adaptation Index (CAI), a key determinant of translational efficiency relevant to mRNA vaccine antigen design?
+> Can codon usage bias and adaptation of SARS-CoV-2 variant coding sequences to the human host be quantitatively characterized using compositional and codon-level features, and can these features predict the Codon Adaptation Index (CAI), a commonly used measure of codon adaptation relevant to translational efficiency in mRNA vaccine antigen design?
 
 ---
 
 ## <a id="project-overview"></a>📖 Project Overview
 
-This project develops a computational pipeline to analyze codon usage bias in SARS-CoV-2 variants. It extracts coding sequences from GenBank records for the original, Beta, Delta, and Omicron variants, evaluates human codon adaptation using CAI and related metrics, compares codon usage across variants, and uses regression to assess whether CAI can be predicted from simple sequence composition features.
+This project develops a computational pipeline to analyze codon usage bias in SARS-CoV-2 variants. It extracts coding sequences from GenBank records for the original, Beta, Delta, and Omicron variants, quantifies adaptation to human codon usage using CAI and related metrics, compares codon usage across variants, and uses regression to assess whether CAI can be predicted from simpler sequence-composition features.
 
 ---
 
@@ -155,7 +155,7 @@ flowchart LR
 
 Each GenBank file was parsed feature-by-feature, retaining only `CDS` regions. Every candidate sequence was validated for: only A/T/G/C bases, length divisible by 3, a valid ATG start codon, a valid terminal stop codon, and no internal stop codons.
 
-**QC correctly rejected 4 malformed CDS regions**, confirming the validation logic works as intended rather than silently passing corrupted sequences through:
+> QC rejected 4 malformed CDS regions, demonstrating that the validation logic actively filtered problematic sequences rather than silently passing them through.
 
 | Source Genome | Rejection Reason |
 |---|---|
@@ -195,7 +195,7 @@ This produced a single, fully numeric **Final Feature Matrix** (54 rows × 98 co
 
 5. **PCA (full 61-codon frequency space):** the first two components explain **42.7%** of variance (PC1 = 23.4%, PC2 = 19.4%), lower than the scalar PCA, as expected given the much higher dimensionality, but the same gene-driven clustering pattern (not variant-driven) is visible.
 
-6. **Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest but real signal worth noting.
+6. **Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest signal worth noting.
 
 7. **Codon usage bias vs. human reference (heatmap):** All four variants show near-identical row patterns, consistently favoring codons like GTT, CTT, and disfavoring CTG, GAG relative to the human host, indicating this bias is a virus-wide trait rather than variant-specific.
 
@@ -246,7 +246,7 @@ A Kruskal-Wallis H-test (non-parametric, chosen due to no assumption of normalit
 | Composition-only (baseline) | **0.9481** | **0.0051** | **0.0065** |
 | Composition + variant (one-hot) | 0.9418 | 0.0054 | 0.0069 |
 
-Adding variant identity **slightly worsened** every metric, indicating variant identity provides no additional predictive value beyond sequence composition — an independent, model-based confirmation of the same conclusion drawn from the Kruskal-Wallis test and EDA above.
+Adding variant identity **slightly worsened** every metric, indicating variant identity provides no additional predictive value beyond sequence composition, providing a model-based result consistent with the conclusions from the Kruskal-Wallis test and EDA..
 
 ### Feature Coefficients (Final Model)
 
@@ -260,11 +260,11 @@ Adding variant identity **slightly worsened** every metric, indicating variant i
 | GC_content | −0.0026 | Negative (weak) |
 | Amino acid composition (PC2) | +0.0023 | Positive (weak) |
 
-Nucleotide skew (AT_skew, GC_skew) and amino acid usage patterns (captured by the top two PCA components) emerged as the strongest predictors of CAI in this dataset.
+Nucleotide skew (AT_skew, GC_skew) and amino acid usage patterns (captured by the top two PCA components) showed the largest model coefficients among the included predictors in this dataset.
 
 ### Model Diagnostics
 
-- **Predicted vs. Actual CAI:** Points closely track the diagonal "perfect prediction" line across the full CAI range (0.56–0.70), visually confirming the strong R².
+- **Predicted vs. Actual CAI:** Points closely track the diagonal "perfect prediction" line across the full CAI range (0.56–0.70), consistent with the strong cross-validated R².
 - **Residuals vs. Predicted CAI:** Residuals scatter around zero without a funnel or curved pattern, indicating no systematic bias across the prediction range. One sequence (predicted CAI ≈ 0.565) showed a larger positive residual (~+0.017), a mild outlier consistent with natural variability at this sample size.
 
 ---
@@ -285,7 +285,7 @@ Nucleotide skew (AT_skew, GC_skew) and amino acid usage patterns (captured by th
 
 ## <a id="key-finding"></a>🌟 Key Finding
 
-CAI does not differ significantly among the four SARS-CoV-2 variants, as supported by visualization, the Kruskal-Wallis test, and machine learning analysis. CAI is also predicted accurately from basic sequence composition features, with an LOOCV-validated R² of 0.9481. These findings suggest that codon adaptation is a virus-wide, composition-linked property rather than a variant-specific feature, supporting rapid CAI estimation for mRNA vaccine antigen screening.
+CAI did not differ significantly among the four SARS-CoV-2 variant groups in this dataset (Kruskal-Wallis p = 0.8155), consistent with the overlapping distributions and gene-driven clustering observed in the exploratory analyses. A Ridge regression model predicted CAI from basic sequence-composition features with an LOOCV R² of 0.9481. Together, these results indicate that CAI variation in this dataset is strongly associated with sequence composition and does not show a detectable variant-specific pattern. This framework provides a computational basis for rapid CAI estimation that could support future mRNA vaccine sequence-screening workflows.
 
 ---
 
@@ -294,14 +294,14 @@ CAI does not differ significantly among the four SARS-CoV-2 variants, as support
 - The dataset is modest, with 54 CDS from 11 genomes, limiting statistical power.
 - Each variant has only 2 to 4 independent genomes, which limits generalizability.
 - LOOCV supports internal validation, but performance on novel or highly divergent sequences remains untested.
-
+- The CDS-level observations are not fully independent because multiple genes are represented across closely related viral genomes, and gene identity strongly influenced clustering patterns.c
 ---
 
 ## <a id="future-work"></a>🚀 Future Work
 
 - Include more independent genomes from each variant.
 - Test the regression model across other coronaviruses and RNA viruses.
-- Develop synonymous codon optimization while preserving the encoded protein.
+- Extend the framework from CAI analysis to synonymous codon optimization while preserving the encoded protein sequence.
 - Evaluate non-linear models such as random forest and gradient boosting.
 
 ---
