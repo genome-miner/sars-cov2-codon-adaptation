@@ -186,20 +186,29 @@ This produced a single, fully numeric **Final Feature Matrix** (54 rows × 98 co
 ## <a id="part-3-exploratory-data-analysis"></a>📊 Part 3: Exploratory Data Analysis
 
 1. **Compositional boxplots (CAI, GC content, AT content):** All four variants show heavily overlapping medians and interquartile ranges, with no variant standing out as systematically higher or lower.
+<div align="center">
+  <img src="https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/Codonadapt-cov/Figures/AT_Content_Boxplot.png" alt="AT_Boxplot" width="500">
+</div>
 
-2. **CAI distribution histogram:** All four variants cluster around CAI ≈ 0.62–0.66, with substantial overlap in their density curves.
+3. **CAI distribution histogram:** All four variants cluster around CAI ≈ 0.62–0.66, with substantial overlap in their density curves.
 
-3. **Feature correlation heatmap:** GC content and AT content are perfectly inversely correlated (−1.00, expected by definition). `Codon_usage_similarity`, `Codon_usage_entropy`, and `Unique_codon_fraction` are almost perfectly correlated with one another (r = 0.97–0.99), indicating they capture largely overlapping information. `AT_skew` and `CAI` show the strongest correlation among independent features (r = 0.81).
+4. **Feature correlation heatmap:** GC content and AT content are perfectly inversely correlated (−1.00, expected by definition). `Codon_usage_similarity`, `Codon_usage_entropy`, and `Unique_codon_fraction` are almost perfectly correlated with one another (r = 0.97–0.99), indicating they capture largely overlapping information. `AT_skew` and `CAI` show the strongest correlation among independent features (r = 0.81).
 
-4. **PCA (scalar summary features):** The first two principal components explain **82.7%** of total variance (PC1 = 59.6%, PC2 = 23.1%). Points cluster tightly by *gene identity* across all four variant colors, rather than separating by variant.
+5. **PCA (scalar summary features):** The first two principal components explain **82.7%** of total variance (PC1 = 59.6%, PC2 = 23.1%). Points cluster tightly by *gene identity* across all four variant colors, rather than separating by variant.
 
-5. **PCA (full 61-codon frequency space):** the first two components explain **42.7%** of variance (PC1 = 23.4%, PC2 = 19.4%), lower than the scalar PCA, as expected given the much higher dimensionality, but the same gene-driven clustering pattern (not variant-driven) is visible.
+6. **PCA (full 61-codon frequency space):** the first two components explain **42.7%** of variance (PC1 = 23.4%, PC2 = 19.4%), lower than the scalar PCA, as expected given the much higher dimensionality, but the same gene-driven clustering pattern (not variant-driven) is visible.
+<div align="center">
+  <img src="https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/Codonadapt-cov/Figures/PCA_Plot_Codon_Usage.png" alt="AT_Boxplot" width="500">
+</div>
 
-6. **Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest signal worth noting.
+8. **Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest signal worth noting.
 
-7. **Codon usage bias vs. human reference (heatmap):** All four variants show near-identical row patterns, consistently favoring codons like GTT, CTT, and disfavoring CTG, GAG relative to the human host, indicating this bias is a virus-wide trait rather than variant-specific.
+9. **Codon usage bias vs. human reference (heatmap):** All four variants show near-identical row patterns, consistently favoring codons like GTT, CTT, and disfavoring CTG, GAG relative to the human host, indicating this bias is a virus-wide trait rather than variant-specific.
 
-8. **Amino acid composition:** Near-identical bar heights across all four variants for every amino acid, with Leucine (L) the most abundant (~11–12%) in all groups; wide error bars reflect gene-to-gene variation rather than variant differences.
+10. **Amino acid composition:** Near-identical bar heights across all four variants for every amino acid, with Leucine (L) the most abundant (~11–12%) in all groups; wide error bars reflect gene-to-gene variation rather than variant differences.
+<div align="center">
+  <img src="https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/Codonadapt-cov/Figures/Amino_Acid_Composition.png" alt="AT_Boxplot" width="500">
+</div>
 
 ---
 
@@ -265,7 +274,14 @@ Nucleotide skew (AT_skew, GC_skew) and amino acid usage patterns (captured by th
 ### Model Diagnostics
 
 - **Predicted vs. Actual CAI:** Points closely track the diagonal "perfect prediction" line across the full CAI range (0.56–0.70), consistent with the strong cross-validated R².
+<div align="center">
+  <img src="https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/Codonadapt-cov/Figures/Predicted_vs_Actual_CAI.png" alt="AT_Boxplot" width="400", height="400">
+</div>
+
 - **Residuals vs. Predicted CAI:** Residuals scatter around zero without a funnel or curved pattern, indicating no systematic bias across the prediction range. One sequence (predicted CAI ≈ 0.565) showed a larger positive residual (~+0.017), a mild outlier consistent with natural variability at this sample size.
+<div align="center">
+  <img src="https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/Codonadapt-cov/Figures/Residuals_vs_Predicted.png" alt="AT_Boxplot" width="400", height="400">
+</div>
 
 ---
 
