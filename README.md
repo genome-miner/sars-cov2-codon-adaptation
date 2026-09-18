@@ -217,7 +217,7 @@ A Kruskal-Wallis H-test (non-parametric, chosen due to no assumption of normalit
 
 ---
 
-## <a id="part-5-machine-learning"></a>🤖 Part 5: Machine Learning — Predicting CAI
+## <a id="part-5-machine-learning"></a>🤖 Part 5: Machine Learning (Predicting CAI)
 
 **Goal:** Test whether CAI can be reliably predicted from basic, non-circular sequence composition features (i.e., features not mathematically derived from the codon-count data that CAI itself is calculated from).
 
