@@ -321,6 +321,8 @@ Biotechnologist and Bioinformatician
 - 🐙 [GitHub](https://github.com/genome-miner)
 - 🔗 [LinkedIn](in/sana-aziz-sial-73b189265)
 
+<div align="center">
+    
 ## ⭐ Support the Project
 
 _If you found this repository useful, whether for its methodology, results, or as a reference for your own mRNA project, consider giving it a **star**._
