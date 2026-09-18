@@ -29,7 +29,7 @@
 - <a href="#part-2-feature-engineering">Part 2: Feature Engineering</a>
 - <a href="#part-3-exploratory-data-analysis">Part 3: Exploratory Data Analysis</a>
 - <a href="#part-4-statistical-testing">Part 4: Statistical Testing</a>
-- <a href="#part-5-machine-learning">Part 5: Machine Learning — Predicting CAI</a>
+- <a href="#part-5-machine-learning">Part 5: Machine Learning (Predicting CAI)</a>
 - <a href="#final-results">Final Results Summary</a>
 - <a href="#key-finding">Key Finding</a>
 - <a href="#limitations">Limitations</a>
@@ -185,21 +185,21 @@ This produced a single, fully numeric **Final Feature Matrix** (54 rows × 98 co
 
 ## <a id="part-3-exploratory-data-analysis"></a>📊 Part 3: Exploratory Data Analysis
 
-**Compositional boxplots (CAI, GC content, AT content):** All four variants show heavily overlapping medians and interquartile ranges, with no variant standing out as systematically higher or lower.
+1. **Compositional boxplots (CAI, GC content, AT content):** All four variants show heavily overlapping medians and interquartile ranges, with no variant standing out as systematically higher or lower.
 
-**CAI distribution histogram:** All four variants cluster around CAI ≈ 0.62–0.66, with substantial overlap in their density curves.
+2. **CAI distribution histogram:** All four variants cluster around CAI ≈ 0.62–0.66, with substantial overlap in their density curves.
 
-**Feature correlation heatmap:** GC content and AT content are perfectly inversely correlated (−1.00, expected by definition). `Codon_usage_similarity`, `Codon_usage_entropy`, and `Unique_codon_fraction` are almost perfectly correlated with one another (r = 0.97–0.99), indicating they capture largely overlapping information. `AT_skew` and `CAI` show the strongest correlation among independent features (r = 0.81).
+3. **Feature correlation heatmap:** GC content and AT content are perfectly inversely correlated (−1.00, expected by definition). `Codon_usage_similarity`, `Codon_usage_entropy`, and `Unique_codon_fraction` are almost perfectly correlated with one another (r = 0.97–0.99), indicating they capture largely overlapping information. `AT_skew` and `CAI` show the strongest correlation among independent features (r = 0.81).
 
-**PCA (scalar summary features):** The first two principal components explain **82.7%** of total variance (PC1 = 59.6%, PC2 = 23.1%). Points cluster tightly by *gene identity* across all four variant colors, rather than separating by variant.
+4. **PCA (scalar summary features):** The first two principal components explain **82.7%** of total variance (PC1 = 59.6%, PC2 = 23.1%). Points cluster tightly by *gene identity* across all four variant colors, rather than separating by variant.
 
-**PCA (full 61-codon frequency space):** the first two components explain **42.7%** of variance (PC1 = 23.4%, PC2 = 19.4%), lower than the scalar PCA, as expected given the much higher dimensionality, but the same gene-driven clustering pattern (not variant-driven) is visible.
+5. **PCA (full 61-codon frequency space):** the first two components explain **42.7%** of variance (PC1 = 23.4%, PC2 = 19.4%), lower than the scalar PCA, as expected given the much higher dimensionality, but the same gene-driven clustering pattern (not variant-driven) is visible.
 
-**Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest but real signal worth noting.
+6. **Hierarchical clustering (codon usage profile):** The dendrogram splits sequences predominantly by gene identity; a small subset of same-variant sequences does form tight, low-distance pairings (e.g., a cluster of Beta/Omicron and a cluster of Delta sequences), a modest but real signal worth noting.
 
-**Codon usage bias vs. human reference (heatmap):** All four variants show near-identical row patterns, consistently favoring codons like GTT, CTT, and disfavoring CTG, GAG relative to the human host, indicating this bias is a virus-wide trait rather than variant-specific.
+7. **Codon usage bias vs. human reference (heatmap):** All four variants show near-identical row patterns, consistently favoring codons like GTT, CTT, and disfavoring CTG, GAG relative to the human host, indicating this bias is a virus-wide trait rather than variant-specific.
 
-**Amino acid composition:** Near-identical bar heights across all four variants for every amino acid, with Leucine (L) the most abundant (~11–12%) in all groups; wide error bars reflect gene-to-gene variation rather than variant differences.
+8. **Amino acid composition:** Near-identical bar heights across all four variants for every amino acid, with Leucine (L) the most abundant (~11–12%) in all groups; wide error bars reflect gene-to-gene variation rather than variant differences.
 
 ---
 
@@ -308,11 +308,26 @@ CAI does not differ significantly among the four SARS-CoV-2 variants, as support
 
 ## <a id="license"></a>📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](https://github.com/genome-miner/sars-cov2-codon-adaptation/blob/main/LICENSE).
 
 ---
 
-## <a id="author--contact"></a>👤 Author & Contact
+## <a id="author--contact"></a>👨‍💻 Author & Contact
 
-*[Your name here]*
-*Erasmus Vaccinology Program*
+**Sana Aziz Sial**  
+Biotechnologist and Bioinformatician
+- 🎓 [University of Veterinary and Animal Sciences](https://www.uvas.edu.pk/)
+- 📧 [Email](sanaazizsial@gmail.com)
+- 🐙 [GitHub](https://github.com/genome-miner)
+- 🔗 [LinkedIn](in/sana-aziz-sial-73b189265)
+
+## ⭐ Support the Project
+
+_If you found this repository useful, whether for its methodology, results, or as a reference for your own mRNA project, consider giving it a **star**._
+
+_Thank you for visiting!_
+</div>
+
+<p align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:1A2980,100:26D0CE&height=15&section=header&width=2000"/>
+</p>
